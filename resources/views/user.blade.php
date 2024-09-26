@@ -19,7 +19,7 @@
             <td>{{ $data->nama }}</td>
             <td>{{ $data->level_id }}</td>
         </tr>
-        @endforeach
+
     </table>
 </body>
 </html>
