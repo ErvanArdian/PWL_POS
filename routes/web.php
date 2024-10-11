@@ -8,16 +8,17 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\SupplierController;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+use App\Http\Controllers\AuthController;
+
+Route::pattern('id','[0-9]+'); // artinya ketika ada parameter {id}, maka harus berupa angka
+
+Route::get('login', [AuthController::class,'login'])->name('login');
+Route::post('login', [AuthController::class,'postlogin']);
+Route::get('logout', [AuthController::class,'logout'])->middleware ('auth');
+
+Route::middleware(['auth'])->group(function(){ // artinya semua route di dalam group ini harus login dulu
+
+// masukkan semua route yang perlu autentikasi di sini
 
 Route::get('/', function () {
     return view('welcome');
@@ -117,3 +118,7 @@ Route::group(['prefix' => 'level'], function () {
     Route::delete('/{id}/delete_ajax', [LevelController::class, 'delete_ajax']); // Untuk menghapus data level Ajax
     Route::delete('/{id}', [LevelController::class, 'destroy']); // menghapus data level
 });
+
+
+});
+
