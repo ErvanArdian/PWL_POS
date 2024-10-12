@@ -17,14 +17,7 @@ Route::post('login', [AuthController::class,'postlogin']);
 Route::get('logout', [AuthController::class,'logout'])->middleware ('auth');
 
 Route::middleware(['auth'])->group(function(){ // artinya semua route di dalam group ini harus login dulu
-
-// masukkan semua route yang perlu autentikasi di sini
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/', [WelcomeController::class, 'index']);
+    Route::get('/', [WelcomeController::class, 'index']);
 
 Route::group(['prefix' => 'user'], function() {
     Route::get('/', [UserController::class, 'index']);          //menampilkan halaman awal user
@@ -118,6 +111,13 @@ Route::group(['prefix' => 'level'], function () {
     Route::delete('/{id}/delete_ajax', [LevelController::class, 'delete_ajax']); // Untuk menghapus data level Ajax
     Route::delete('/{id}', [LevelController::class, 'destroy']); // menghapus data level
 });
+
+// masukkan semua route yang perlu autentikasi di sini
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
 
 
 });
