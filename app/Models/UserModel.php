@@ -42,4 +42,12 @@ class UserModel extends Authenticatable
     {
         return $this->level->level_nama === $role;
     }
+
+    /**
+     * Mendapatkan kde role
+     */
+    public function getRole()
+    {
+        return $this->level->level_kode;
+    }
 }
